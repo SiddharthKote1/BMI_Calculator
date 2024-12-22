@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView(){
-    var heightInput by remember {mutableStateOf("")}
-    var weightInput by remember {mutableStateOf("")}
+fun HomeView() {
+    var heightInput by remember { mutableStateOf("") }
+    var weightInput by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
@@ -36,40 +36,38 @@ fun HomeView(){
                     //BMI Calculater text at the top of the scaffold or the screen
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.LightGray,
+                    containerColor = Color.DarkGray,
                     titleContentColor = Color.Black
                 )
                 //titleContentColor is color of the text in the top Appbar Scaffold
                 //container color is color of the app bar
             )
         }
-    ){paddingValues ->
+    ) { paddingValues ->
         //Always whenever we use Scaffold use paddingvalues so that the content of the Scaffold
         //and the content of the other does not overlap with each other
         Column(
-            modifier = Modifier.
-            fillMaxSize().
-            padding(paddingValues).
-            padding(16.dp)
+            modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp)
             //Adds padding 16 from all sides
-        ){
+        ) {
+            OutlinedTextField(
+                value = heightInput,
+                onValueChange = {
+                    heightInput = it
+                },
+                label = {
+                    Text(text = "Enter the Height in m")
+                }
+            )
             Row(
-                modifier=Modifier.fillMaxSize()
-            ){
-                OutlinedTextField(
-                    value=heightInput,
-                    onValueChange = {
-                        heightInput = it
-                    }
-                    label = {
-                        Text(text="Enter Height")
-                    }
-                )
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Text("OOOPS")
             }
-
         }
     }
 }
+
 
 @Composable
 @Preview(showBackground=true)
