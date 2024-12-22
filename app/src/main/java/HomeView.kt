@@ -40,6 +40,7 @@ fun HomeView() {
     //This are expand menus for the height and for the weight
 
     var HeightDropdownMenuExpand by remember { mutableStateOf(false) }
+    var WeightDropdownMenuExpand by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -64,8 +65,8 @@ fun HomeView() {
             //Adds padding 16 from all sides
         ) {
             Row(
-                modifier=Modifier.fillMaxSize()
-               // padding(top=16.dp)
+                modifier = Modifier.fillMaxSize()
+                // padding(top=16.dp)
             ) {
                 OutlinedTextField(
                     value = heightInput,
@@ -82,14 +83,37 @@ fun HomeView() {
                     TextButton(onClick = {
                         HeightDropdownMenuExpand = true
                     }) {
-                        Icon(Icons.Default.ArrowDropDown,contentDescription="you are good enough to know that")
-                        Text(text="Unit")
+                        Icon(
+                            Icons.Default.ArrowDropDown,
+                            contentDescription = "you are good enough to know that"
+                        )
+                        Text(text = "Unit")
                     }
                     //Something here
                 }
             }
-            OutlinedTextField()
-
+            OutlinedTextField(
+                value = weightInput,
+                onValueChange = {
+                    weightInput = it
+                },
+                label = {
+                    Text(text = "Enter the weight")
+                })
+            Row(){
+                Box(){
+                    TextButton(onClick = {
+                        WeightDropdownMenuExpand = true
+                    }) {
+                        Icon(
+                            Icons.Default.ArrowDropDown,
+                            contentDescription = "you are good enough to know that"
+                        )
+                        Text(text = "Unit")
+                    }
+                    //Something here
+                }
+            }
         }
     }
 }
