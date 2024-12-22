@@ -1,6 +1,7 @@
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -42,6 +45,10 @@ fun HomeView() {
     var HeightDropdownMenuExpand by remember { mutableStateOf(false) }
     var WeightDropdownMenuExpand by remember { mutableStateOf(false) }
 
+    //Units
+    var HUnit by remember { mutableStateOf("Unit") }
+    var WUnit by remember {mutableStateOf("Unit")}
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -65,8 +72,6 @@ fun HomeView() {
             //Adds padding 16 from all sides
         ) {
             Row(
-                modifier = Modifier.fillMaxSize()
-                // padding(top=16.dp)
             ) {
                 OutlinedTextField(
                     value = heightInput,
@@ -74,11 +79,10 @@ fun HomeView() {
                         heightInput = it
                     },
                     label = {
-                        Text(text = "Enter the Height in m")
+                        Text(text = "Enter the Height ")
                     }
                 )
                 Box(
-
                 ) {
                     TextButton(onClick = {
                         HeightDropdownMenuExpand = true
@@ -87,40 +91,80 @@ fun HomeView() {
                             Icons.Default.ArrowDropDown,
                             contentDescription = "you are good enough to know that"
                         )
-                        Text(text = "Unit")
+                            //  Text(HUnit="Unit")
                     }
-                    //Something here
+                    DropdownMenu(
+                        expanded = HeightDropdownMenuExpand,
+                        onDismissRequest = {
+                            HeightDropdownMenuExpand =false
+                        }) {
+                        DropdownMenuItem(
+                            text = { Text("feet") },
+                            onClick = {
+                                HeightDropdownMenuExpand = false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text ={Text("metres")},
+                            onClick = {
+                                HeightDropdownMenuExpand =false
+                                text = ""
+                            }
+                        )
+                    }
                 }
             }
-            OutlinedTextField(
-                value = weightInput,
-                onValueChange = {
-                    weightInput = it
-                },
-                label = {
-                    Text(text = "Enter the weight")
-                })
-            Row(){
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier=Modifier.fillMaxSize()
+            ){
+                OutlinedTextField(
+                    value=weightInput,
+                    onValueChange={
+                        weightInput =it
+                    },
+                    label = {
+                        Text(text="Enter the Weight")
+                    }
+                )
                 Box(){
                     TextButton(onClick = {
                         WeightDropdownMenuExpand = true
                     }) {
+                        Text(text = "Unit")
                         Icon(
                             Icons.Default.ArrowDropDown,
                             contentDescription = "you are good enough to know that"
                         )
                         Text(text = "Unit")
                     }
-                    //Something here
+                    DropdownMenu(
+                        expanded = WeightDropdownMenuExpand,
+                        onDismissRequest = {
+                            WeightDropdownMenuExpand =false
+                        }) {
+                        DropdownMenuItem(
+                            text = { Text("kg") },
+                            onClick = {
+                                WeightDropdownMenuExpand =false
+                            }
+                        )
+                        DropdownMenuItem(
+                            text ={Text("lbs")},
+                            onClick = {
+                                WeightDropdownMenuExpand =false
+                            }
+                        )
+                    }
                 }
             }
         }
     }
 }
 
+
 @Composable
 @Preview(showBackground=true)
 fun HomeViewPreview(){
     HomeView()
 }
-
