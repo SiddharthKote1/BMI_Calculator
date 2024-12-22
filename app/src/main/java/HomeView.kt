@@ -1,13 +1,22 @@
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
@@ -25,8 +34,12 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeView() {
+    //This are for the height and input values for the person
     var heightInput by remember { mutableStateOf("") }
     var weightInput by remember { mutableStateOf("") }
+    //This are expand menus for the height and for the weight
+
+    var HeightDropdownMenuExpand by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
@@ -50,24 +63,36 @@ fun HomeView() {
             modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp)
             //Adds padding 16 from all sides
         ) {
-            OutlinedTextField(
-                value = heightInput,
-                onValueChange = {
-                    heightInput = it
-                },
-                label = {
-                    Text(text = "Enter the Height in m")
-                }
-            )
             Row(
-                modifier = Modifier.fillMaxSize()
+                modifier=Modifier.fillMaxSize()
+               // padding(top=16.dp)
             ) {
-                Text("OOOPS")
+                OutlinedTextField(
+                    value = heightInput,
+                    onValueChange = {
+                        heightInput = it
+                    },
+                    label = {
+                        Text(text = "Enter the Height in m")
+                    }
+                )
+                Box(
+
+                ) {
+                    TextButton(onClick = {
+                        HeightDropdownMenuExpand = true
+                    }) {
+                        Icon(Icons.Default.ArrowDropDown,contentDescription="you are good enough to know that")
+                        Text(text="Unit")
+                    }
+                    //Something here
+                }
             }
+            OutlinedTextField()
+
         }
     }
 }
-
 
 @Composable
 @Preview(showBackground=true)
