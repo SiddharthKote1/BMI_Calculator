@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.bmi2
 
 import HomeView
 import android.os.Bundle
@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-             BMITheme {
+            BMITheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
@@ -29,3 +29,4 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
