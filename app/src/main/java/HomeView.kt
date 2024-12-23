@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeView() {
+fun HomeView(modifier:Modifier=Modifier) {
     //This are for the height and input values for the person
     var heightInput by remember { mutableStateOf("") }
     var weightInput by remember { mutableStateOf("") }

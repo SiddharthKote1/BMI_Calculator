@@ -1,5 +1,6 @@
-package com.example.bmi
+package com.example.myapplication
 
+import HomeView
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,12 +19,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            BMITheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
+             BMITheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    HomeView(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
-
