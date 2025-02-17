@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.BMI" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.BMI" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenBackground">#D3D3D3</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/_85</item>
+        <item name="android:width">400dp</item>
+        <item name="android:height">400dp</item>
+        <item name="windowSplashScreenIconBackgroundColor">#D3D3D3</item>
+        <item name="postSplashScreenTheme">@color/white</item>
+    </style>
+    
+
+
 </resources>

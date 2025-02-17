@@ -1,4 +1,5 @@
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -54,6 +55,8 @@ fun HomeView(modifier: Modifier = Modifier) {
 
     var bmiResult by remember { mutableStateOf("") }
 
+    var backgroundColor by remember { mutableStateOf(Color.White) }
+
     fun calculateBMI() {
         // Convert height to meters
         val heightInMeters: Float? = when (heightUnit) {
@@ -77,27 +80,26 @@ fun HomeView(modifier: Modifier = Modifier) {
 
         // Validate height and weight
         if (heightInMeters == null || heightInMeters <= 0) {
-            bmiResult = "Invalid height input. Please check and try again."
+            bmiResult = "Recheck the details."
             return
         }
 
         if (weightInKg == null || weightInKg <= 0) {
-            bmiResult = "Invalid weight input. Please check and try again."
+            bmiResult = "Invalid the details."
             return
         }
 
         // Calculate BMI
-        val bmi = weightInKg / (heightInMeters * heightInMeters)
+        val bmi = weightInKg / (heightInMeters*heightInMeters)
         bmiResult = "Your BMI is: %.2f".format(bmi)
     }
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(text = "BMI Calculator") },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.DarkGray,
-                    titleContentColor = Color.Black
+                    containerColor = Color.Black,
+                    titleContentColor = Color.White
                 )
             )
         }
@@ -107,6 +109,8 @@ fun HomeView(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp)
+                .background(backgroundColor)
+
         ) {
             // Height Input
             Row {
@@ -214,19 +218,21 @@ fun HomeView(modifier: Modifier = Modifier) {
 
             Text(
                 text = bmiResult,
-                color = Color.Black
+                color = Color.Black,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
 
-            if (bmiResult.isNotEmpty()) {
+           if (bmiResult.isNotEmpty()) {
                 when {
                     bmiResult.startsWith("Invalid") -> {
                         // Display error message
                         Text(
-                            text = "Invalid input. Please correct the height or weight values.",
-                            color = Color.Red,
-                            modifier = Modifier.padding(8.dp)
+                            text = "Select the Unit",
+                            color = Color.Black,
+                            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally)
                         )
                     }
+
                     else -> {
                         // Determine BMI category
                         val bmiValue = bmiResult.substringAfter("Your BMI is: ").toFloatOrNull()
@@ -242,8 +248,22 @@ fun HomeView(modifier: Modifier = Modifier) {
                             text = "BMI Category: $bmiCategory",
                             style = MaterialTheme.typography.bodyLarge,
                             color = Color.Black,
-                            modifier = Modifier.padding(8.dp)
+                            modifier = Modifier.padding(8.dp).align(
+                                Alignment.CenterHorizontally
+                            )
                         )
+                        if(bmiCategory=="Underweight"){
+                            backgroundColor=Color(0xFFFFFACD)
+                        }
+                        else if(bmiCategory=="Normal weight"){
+                            backgroundColor=Color(0xFF90EE90)
+                        }
+                        else if(bmiCategory=="Overweight"){
+                          backgroundColor=Color(0xFFFFA07A)
+                        }
+                        else if(bmiCategory=="Obese"){
+                            backgroundColor=Color(0xFFCD5C5C)
+                        }
                     }
                 }
             }
@@ -251,8 +271,3 @@ fun HomeView(modifier: Modifier = Modifier) {
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun HomeViewPreview() {
-    HomeView()
-}
